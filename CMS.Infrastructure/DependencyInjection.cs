@@ -15,6 +15,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionCMSWebApi")));
 
+        Console.WriteLine("DefaultConnectionCMSWebApi: " + configuration.GetConnectionString("DefaultConnectionCMSWebApi"));
+
         // Register repositories
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<IProductRepository, ProductRepository>();

@@ -18,15 +18,15 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Seed data
-        modelBuilder.Entity<Product>().HasData(
-            new Product
-            {
-                Id = 1,
-                Name = "Sample Product",
-                Description = "This is a sample product",
-                Price = 19.99m,
-                CreatedAt = DateTime.UtcNow
-            }
-        );
+        //modelBuilder.Entity<Product>().HasData(
+        //    new Product
+        //    {
+        //        Id = 1,
+        //        Name = "Sample Product",
+        //        Description = "This is a sample product",
+        //        Price = 19.99m,
+        //        CreatedAt = DateTime.UtcNow
+        //    }
+        //);
     }
 }

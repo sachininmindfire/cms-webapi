@@ -7,17 +7,17 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    // Add Azure Key Vault if in production
-    //if (builder.Environment.IsProduction())
-    //{
-    //    var keyVaultUrl = builder.Configuration["KeyVaultUrl"];
-    //    if (!string.IsNullOrEmpty(keyVaultUrl))
-    //    {
-    //        builder.Configuration.AddAzureKeyVault(
-    //            new Uri(keyVaultUrl),
-    //            new DefaultAzureCredential());
-    //    }
-    //}
+    //Add Azure Key Vault if in production
+    if (builder.Environment.IsProduction())
+    {
+        var keyVaultUrl = builder.Configuration["KeyVaultUrl"];
+        if (!string.IsNullOrEmpty(keyVaultUrl))
+        {
+            builder.Configuration.AddAzureKeyVault(
+                new Uri(keyVaultUrl),
+                new DefaultAzureCredential());
+        }
+    }
 
     // Add services to the container
     builder.Services.AddControllers();
@@ -25,7 +25,7 @@ try
     builder.Services.AddSwaggerGen();
 
     // Add Infrastructure services
-    //builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddInfrastructure(builder.Configuration);
 
     var app = builder.Build();
 

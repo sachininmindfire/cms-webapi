@@ -1,6 +1,56 @@
 @CMS.WebAPI_HostAddress = http://localhost:5058
 
+### Get Weather Forecast
 GET {{CMS.WebAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+### Health Check
+GET {{CMS.WebAPI_HostAddress}}/
+Accept: text/plain
+
+###
+
+### Get All Products
+GET {{CMS.WebAPI_HostAddress}}/api/products
+Accept: application/json
+
+###
+
+### Get Product by ID
+GET {{CMS.WebAPI_HostAddress}}/api/products/1
+Accept: application/json
+
+###
+
+### Create a New Product
+POST {{CMS.WebAPI_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "description": "Description of the new product",
+  "price": 19.99
+}
+
+###
+
+### Update an Existing Product
+PUT {{CMS.WebAPI_HostAddress}}/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Updated Product",
+  "description": "Updated description of the product",
+  "price": 29.99
+}
+
+###
+
+### Delete a Product
+DELETE {{CMS.WebAPI_HostAddress}}/api/products/1
+Accept: application/json
+
+###
+
