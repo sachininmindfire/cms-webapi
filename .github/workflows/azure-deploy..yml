@@ -29,10 +29,10 @@ jobs:
       # - name: Generate EF Core migration bundle
       #   run: dotnet ef migrations script --idempotent --output ${{env.DOTNET_ROOT}}/migrations.sql --project CMS.Infrastructure/CMS.Infrastructure.csproj --startup-project CMS.API/CMS.API.csproj
 
-      # # - name: Azure login
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
       
       # - name: Run database migrations
       #   uses: azure/sql-action@v1
