@@ -13,7 +13,7 @@ public static class DependencyInjection
     {
         // Register DB context
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionCMSWebApi")));
 
         // Register repositories
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

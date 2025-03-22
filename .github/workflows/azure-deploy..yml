@@ -1,0 +1,50 @@
+name: Build and deploy .NET Core app to Azure Web App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: Publish with dotnet
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      
+      - name: Install EF Core CLI
+        run: dotnet tool install --global dotnet-ef
+      
+      - name: Generate EF Core migration bundle
+        run: dotnet ef migrations script --idempotent --output ${{env.DOTNET_ROOT}}/migrations.sql --project CMS.Infrastructure/CMS.Infrastructure.csproj --startup-project CMS.Api/CMS.Api.csproj
+
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Run database migrations
+        uses: azure/sql-action@v1
+        with:
+          server-name: cms-dbserver.database.windows.net
+          connection-string: ${{ secrets.DATABASE_CONNECTION_STRING }}
+          sql-file: ${{env.DOTNET_ROOT}}/migrations.sql
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'cms-webapi-app'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{env.DOTNET_ROOT}}/myapp
