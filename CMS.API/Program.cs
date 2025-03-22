@@ -46,6 +46,8 @@ app.UseStaticFiles(); // Enable serving static files
 app.UseAuthorization();
 app.MapControllers();
 
+app.MapGet("/health", () => "API is running");
+
 // Apply migrations on startup
 using (var scope = app.Services.CreateScope())
 {
