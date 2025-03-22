@@ -1,4 +1,3 @@
-// CMS.Api/Program.cs
 using Azure.Identity;
 using CMS.Infrastructure;
 using CMS.Infrastructure.Data;
@@ -31,13 +30,18 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
-else
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseHttpsRedirection();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = string.Empty; // Serve the Swagger UI at the app's root
+});
+
+app.UseHttpsRedirection();
+app.UseStaticFiles(); // Enable serving static files
 
 app.UseAuthorization();
 app.MapControllers();
