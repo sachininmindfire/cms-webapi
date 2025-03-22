@@ -27,7 +27,7 @@ jobs:
         run: dotnet tool install --global dotnet-ef
       
       - name: Generate EF Core migration bundle
-        run: dotnet ef migrations script --idempotent --output ${{env.DOTNET_ROOT}}/migrations.sql --project CMS.Infrastructure/CMS.Infrastructure.csproj --startup-project CMS.Api/CMS.Api.csproj
+        run: dotnet ef migrations script --idempotent --output ${{env.DOTNET_ROOT}}/migrations.sql --project CMS.Infrastructure/CMS.Infrastructure.csproj --startup-project CMS.API/CMS.API.csproj
 
       - name: Azure login
         uses: azure/login@v1
