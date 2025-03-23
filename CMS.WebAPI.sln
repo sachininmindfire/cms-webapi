@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflow", "workflow", "{41C315A3-2898-4532-A806-DF20E44D61B2}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\azure-deploy..yml = .github\workflows\azure-deploy..yml
+		.github\workflows\main_cms-webapi-app.yml = .github\workflows\main_cms-webapi-app.yml
 	EndProjectSection
 EndProject
 Global
