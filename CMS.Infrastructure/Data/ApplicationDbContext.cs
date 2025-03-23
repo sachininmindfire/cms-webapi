@@ -17,16 +17,12 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Seed data
-        //modelBuilder.Entity<Product>().HasData(
-        //    new Product
-        //    {
-        //        Id = 1,
-        //        Name = "Sample Product",
-        //        Description = "This is a sample product",
-        //        Price = 19.99m,
-        //        CreatedAt = DateTime.UtcNow
-        //    }
-        //);
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.Property(e => e.Price)
+                .HasColumnType("decimal(18,2)"); // Specify precision and scale
+        });
     }
 }
