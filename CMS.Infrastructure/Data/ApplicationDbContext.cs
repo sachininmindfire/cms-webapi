@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Content> Contents { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
