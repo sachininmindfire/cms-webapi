@@ -51,11 +51,11 @@ try
     app.MapGet("/health", () => "API is running");
 
     // Apply migrations on startup
-    using (var scope = app.Services.CreateScope())
-    {
-        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        dbContext.Database.Migrate();
-    }
+    //using (var scope = app.Services.CreateScope())
+    //{
+    //    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    //    dbContext.Database.Migrate();
+    //}
 
     app.Run();
 }
